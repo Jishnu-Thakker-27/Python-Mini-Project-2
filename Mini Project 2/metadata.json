@@ -1,0 +1,6 @@
+{
+  "name": "Aether Quiz - Mindful Live Arena",
+  "description": "A serene, luminous frosted glass quiz arena with live standings, mindful questions, and fluid light and dark modes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
