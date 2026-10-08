@@ -1,22 +1,756 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Aether Quiz - Mindful Live Arena</title>
-    <meta name="description" content="A serene, luminous frosted glass quiz arena with live standings, mindful questions, and fluid light and dark modes." />
-    <meta property="og:title" content="Aether Quiz - Mindful Live Arena" />
-    <meta property="og:description" content="A serene, luminous frosted glass quiz arena with live standings, mindful questions, and fluid light and dark modes." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Aether Quiz - Mindful Live Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-light">
 
+  <!-- Ambient Glowing Atmospheric Orbs -->
+  <div class="ambient-glow orb-1"></div>
+  <div class="ambient-glow orb-2"></div>
+  <div class="ambient-glow orb-3"></div>
+
+  <!-- FIXED TOP HEADER -->
+  <header id="app-header" class="app-header hidden">
+    <div class="header-container">
+      <!-- Logo & Brand -->
+      <div class="header-brand" id="brand-logo" title="Back to Dashboard">
+        <img
+          src="https://lh3.googleusercontent.com/aida/AEtjO1VLG1EEL74GEZu32N1HcaHpntMZNqTHuBXtqZFN0dzGlqH-zMlWoHTwaFVy1mP9f454NxooPxJgKKOhz1_s6ZV3rpOtftzXVYB9Nvs9Zkybp4OvcEX_gErjfpJupuxPyedcTH_AJB0qOclyH0TgKElUpHSVn6s3pvqFxm-8yjKp9JtOuUi9FC1H7AeNhn6BrFzlJtRY8jhUovmIVEpTl9lUPf4fVx3Ra5ungyxuniSTSvgLG1ixR1tLaZU"
+          alt="Aether Quiz Logo"
+          class="header-brand-logo"
+        >
+        <div class="header-brand-text">
+          <span class="header-brand-title">Aether Quiz</span>
+          <span class="header-brand-subtitle" id="header-subtitle">Live Quiz Arena</span>
+        </div>
+      </div>
+
+      <!-- Header Actions: Theme Switcher & User Avatar -->
+      <div class="header-actions">
+        <button id="btn-theme-toggle" class="icon-btn" title="Toggle Solar Dawn / Night Sky Mode" aria-label="Toggle theme">
+          <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+        </button>
+
+        <button id="profile-trigger-btn" class="header-avatar-btn" title="Open Profile & Settings" aria-label="Open profile">
+          <img
+            id="header-avatar-img"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9gHgGbh8_tPQzIsblnGdSHbU5MVtlwGLg96zb9x5ENAeYCYmBjnD2IvyE9P12pVn1A94lfF--03uZ8_sO0m9ltPlvcdAVRt9gfVnAERURluzs1qgSLHeNlRxj-Ve9mbtObCExZS6r4hU76i0mHyKgzWkVKz4gTEV_UQ-8oyNrgqq6vp8FdaYrfT88ge4sJ_aGDKcZsLqDNERsX5XPCzheu8zLk4pFHsUFBISn7hTZ_RTE40ImyzGh"
+            alt="User Avatar"
+            class="header-avatar-img"
+          >
+          <span class="online-dot"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT CONTAINER -->
+  <main class="main-wrapper">
+
+    <!-- ========================================== -->
+    <!-- SCREEN 1: AUTHENTICATION (Sign In / Register / Guest) -->
+    <!-- ========================================== -->
+    <section id="auth-screen" class="screen-view active">
+      <div class="auth-container">
+        
+        <div class="auth-top-strip">
+          <div></div>
+          <button id="auth-theme-toggle" class="icon-btn" title="Toggle Theme">
+            <span class="material-symbols-outlined" id="auth-theme-icon">dark_mode</span>
+          </button>
+        </div>
+
+        <div class="auth-hero-box frosted-glass">
+          <img
+            src="https://lh3.googleusercontent.com/aida/AEtjO1VLG1EEL74GEZu32N1HcaHpntMZNqTHuBXtqZFN0dzGlqH-zMlWoHTwaFVy1mP9f454NxooPxJgKKOhz1_s6ZV3rpOtftzXVYB9Nvs9Zkybp4OvcEX_gErjfpJupuxPyedcTH_AJB0qOclyH0TgKElUpHSVn6s3pvqFxm-8yjKp9JtOuUi9FC1H7AeNhn6BrFzlJtRY8jhUovmIVEpTl9lUPf4fVx3Ra5ungyxuniSTSvgLG1ixR1tLaZU"
+            alt="Aether Quiz Logo"
+            class="auth-hero-logo"
+          >
+          <h1 class="auth-hero-title">Aether Quiz</h1>
+          <p class="auth-hero-subtitle">Mindful arena of knowledge, speed & celestial rankings</p>
+        </div>
+
+        <!-- Auth Tabs -->
+        <div class="auth-tabs">
+          <button id="tab-login" class="auth-tab-btn active">Sign In</button>
+          <button id="tab-register" class="auth-tab-btn">Register</button>
+          <button id="tab-guest" class="auth-tab-btn">Guest</button>
+        </div>
+
+        <!-- Form: Sign In -->
+        <form id="login-form" class="auth-form-pane active frosted-glass" style="padding: 20px;">
+          <div class="form-group">
+            <label class="form-label" for="login-username">Identifier / Username</label>
+            <input type="text" id="login-username" class="input-field" placeholder="Enter your username" autocomplete="username" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Passphrase / Password</label>
+            <input type="password" id="login-password" class="input-field" placeholder="Enter your password" autocomplete="current-password" required>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top: 6px;">
+            <span>Start Quiz</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+
+          <p style="text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 8px;">
+            Default Admin: <strong>admin</strong> / <strong>adminpassword</strong>
+          </p>
+        </form>
+
+        <!-- Form: Register -->
+        <form id="register-form" class="auth-form-pane frosted-glass" style="padding: 20px;">
+          <div class="form-group">
+            <label class="form-label" for="reg-name">Full Name</label>
+            <input type="text" id="reg-name" class="input-field" placeholder="e.g. Alex Mercer">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-username">Choose Username</label>
+            <input type="text" id="reg-username" class="input-field" placeholder="Unique wanderer handle" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" class="input-field" placeholder="e.g. alex@aether.io">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-password">Password</label>
+            <input type="password" id="reg-password" class="input-field" placeholder="Create strong passphrase" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-confirm-password">Confirm Password</label>
+            <input type="password" id="reg-confirm-password" class="input-field" placeholder="Re-enter passphrase" required>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top: 6px;">
+            <span>Create Account</span>
+          </button>
+        </form>
+
+        <!-- Guest Pane -->
+        <div id="guest-form" class="auth-form-pane frosted-glass" style="padding: 24px; text-align: center;">
+          <span class="material-symbols-outlined" style="font-size: 40px; color: var(--accent-sky); margin-bottom: 8px;">
+            explore
+          </span>
+          <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Play as Guest</h3>
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.45;">
+            Dive directly into live quizzes immediately. You can test your speed and score without saving permanent records.
+          </p>
+          <button id="guest-play-btn" class="btn-primary">
+            <span>Start as Guest</span>
+            <span class="material-symbols-outlined text-[18px]">login</span>
+          </button>
+        </div>
+
+        <div id="auth-alert" class="auth-alert error hidden"></div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 2: DASHBOARD / ARENA SETUP -->
+    <!-- ========================================== -->
+    <section id="dashboard-screen" class="screen-view">
+      <div class="dashboard-view">
+
+        <!-- User Hero Card -->
+        <div class="user-hero-card frosted-glass">
+          <div class="user-hero-left">
+            <img
+              id="dash-avatar-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9gHgGbh8_tPQzIsblnGdSHbU5MVtlwGLg96zb9x5ENAeYCYmBjnD2IvyE9P12pVn1A94lfF--03uZ8_sO0m9ltPlvcdAVRt9gfVnAERURluzs1qgSLHeNlRxj-Ve9mbtObCExZS6r4hU76i0mHyKgzWkVKz4gTEV_UQ-8oyNrgqq6vp8FdaYrfT88ge4sJ_aGDKcZsLqDNERsX5XPCzheu8zLk4pFHsUFBISn7hTZ_RTE40ImyzGh"
+              alt="Avatar"
+              class="user-hero-avatar"
+            >
+            <div class="user-hero-title-group">
+              <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--accent-sky); letter-spacing: 0.5px;">Wanderer Sanctuary</span>
+              <h2 id="dash-display-name">Alex Mercer</h2>
+              <span class="user-hero-meta" id="dash-rank-meta">Rank #4 • Master Strategist</span>
+            </div>
+          </div>
+          <button id="dash-start-quiz-shortcut" class="btn-primary" style="width: auto; height: 38px; padding: 0 16px; font-size: 13px;">
+            <span>Quick Quiz</span>
+          </button>
+        </div>
+
+        <!-- Bento Stats Grid -->
+        <div class="bento-stats-row">
+          <div class="bento-stat-card frosted-glass">
+            <span class="bento-stat-label">Personal High</span>
+            <span class="bento-stat-value" id="stat-high-score">0</span>
+            <span class="bento-stat-sub">
+              <span class="material-symbols-outlined text-[14px]">military_tech</span>
+              Best record
+            </span>
+          </div>
+
+          <div class="bento-stat-card frosted-glass">
+            <span class="bento-stat-label">Total Points</span>
+            <span class="bento-stat-value" id="stat-total-score">0</span>
+            <span class="bento-stat-sub">
+              <span class="material-symbols-outlined text-[14px]">bolt</span>
+              XP Earned
+            </span>
+          </div>
+
+          <div class="bento-stat-card frosted-glass">
+            <span class="bento-stat-label">Quizzes Taken</span>
+            <span class="bento-stat-value" id="stat-quizzes-played">0</span>
+            <span class="bento-stat-sub">
+              <span class="material-symbols-outlined text-[14px]">trending_up</span>
+              Rounds played
+            </span>
+          </div>
+
+          <div class="bento-stat-card frosted-glass">
+            <span class="bento-stat-label">Accuracy Marks</span>
+            <span class="bento-stat-value" id="stat-accuracy">88%</span>
+            <span class="bento-stat-sub">
+              <span class="material-symbols-outlined text-[14px]">verified</span>
+              Top percentile
+            </span>
+          </div>
+        </div>
+
+        <!-- Quiz Arena Configurator -->
+        <div class="setup-card frosted-glass">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <h3 class="setup-header-title">Configure Arena Round</h3>
+            <span class="badge-capsule light-glow" style="font-size: 10px;">5 Questions</span>
+          </div>
+
+          <!-- Category Selection -->
+          <div>
+            <span class="pills-group-title">1. Knowledge Domain</span>
+            <div class="pills-container" id="category-pills-container">
+              <button class="choice-pill active" data-category="Mixed">🎲 All Categories (Mixed)</button>
+              <button class="choice-pill" data-category="Programming">💻 Programming</button>
+              <button class="choice-pill" data-category="Science">🔬 Science</button>
+              <button class="choice-pill" data-category="History">📜 History</button>
+              <button class="choice-pill" data-category="General Knowledge">🌍 General Knowledge</button>
+            </div>
+          </div>
+
+          <!-- Difficulty Selection -->
+          <div>
+            <span class="pills-group-title">2. Difficulty Tier</span>
+            <div class="pills-container" id="difficulty-pills-container">
+              <button class="choice-pill active" data-difficulty="Any">🎯 Any Difficulty</button>
+              <button class="choice-pill" data-difficulty="Easy">🟢 Easy (10 XP)</button>
+              <button class="choice-pill" data-difficulty="Medium">🟡 Medium (20 XP)</button>
+              <button class="choice-pill" data-difficulty="Hard">🔴 Hard (30 XP)</button>
+            </div>
+          </div>
+
+          <!-- Speed Bonus Preview -->
+          <div class="speed-bonus-pill">
+            <span class="material-symbols-outlined" style="font-size: 20px;">speed</span>
+            <div>
+              <strong>Speed Multiplier:</strong> Answer in &le; 5s for <strong>2.0x</strong> &bull; &le; 10s for <strong>1.5x</strong>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div style="display: flex; gap: 10px;">
+            <button id="btn-start-quiz" class="btn-primary" style="flex: 2;">
+              <span>Launch Quiz Arena</span>
+              <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+            </button>
+            <button id="btn-view-leaderboard" class="btn-subtle" style="flex: 1;">
+              <span>Standings</span>
+            </button>
+          </div>
+
+          <!-- Admin Quick Access -->
+          <button id="btn-dash-admin" class="btn-subtle hidden" style="border-color: rgba(14, 165, 233, 0.4);">
+            <span class="material-symbols-outlined text-[18px]">shield_person</span>
+            <span>Administrator Portal</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 3: ACTIVE QUIZ ARENA -->
+    <!-- ========================================== -->
+    <section id="quiz-screen" class="screen-view">
+      <div class="quiz-arena">
+
+        <!-- Top Status Strip -->
+        <div class="quiz-top-strip">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button id="btn-quit-quiz" class="quiz-btn-quit" title="Quit Quiz Early">
+              <span class="material-symbols-outlined text-[15px]">logout</span>
+              <span>Quit Quiz</span>
+            </button>
+
+            <span class="badge-capsule light-glow">
+              <span id="quiz-cat-badge">Programming</span>
+            </span>
+          </div>
+
+          <!-- Live Timer & Dynamic Multiplier -->
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div id="live-multiplier-badge" class="live-bonus-badge bonus-2x">
+              <span class="online-dot" style="position:static; display:inline-block; width:7px; height:7px;"></span>
+              <span id="live-multiplier-text">2.0x</span>
+            </div>
+
+            <div class="countdown-timer-pill frosted-glass">
+              <span class="material-symbols-outlined text-[18px] text-sky-500">timer</span>
+              <span id="quiz-time-display">00:24</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento Progress Row: Circular Progress Arc + Question Track -->
+        <div class="quiz-bento-row">
+          
+          <!-- Circular Progress Card -->
+          <div class="circle-progress-card frosted-glass">
+            <div class="svg-progress-wrap">
+              <svg width="72" height="72" viewBox="0 0 72 72">
+                <circle
+                  cx="36" cy="36" r="30"
+                  fill="transparent"
+                  stroke="rgba(100, 116, 139, 0.2)"
+                  stroke-width="5"
+                />
+                <circle
+                  id="svg-progress-circle"
+                  cx="36" cy="36" r="30"
+                  fill="transparent"
+                  stroke="#0ea5e9"
+                  stroke-width="5"
+                  stroke-dasharray="188.5"
+                  stroke-dashoffset="150"
+                  stroke-linecap="round"
+                  style="transition: stroke-dashoffset 0.5s ease;"
+                />
+              </svg>
+              <div class="svg-progress-center">
+                <span id="circle-progress-percent">20%</span>
+              </div>
+            </div>
+            <span class="progress-card-label">Quiz Progress</span>
+          </div>
+
+          <!-- Question Track & Streak -->
+          <div class="question-track-card frosted-glass">
+            <div class="track-top-line">
+              <span class="track-label">Question Track</span>
+              <div class="streak-pill">
+                <span class="material-symbols-outlined text-[13px]">local_fire_department</span>
+                <span id="live-streak-label">5 Streak</span>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="track-main-title">
+                Question <span id="current-q-index" style="font-size:20px; font-weight:800; color:var(--text-main);">01</span>
+                <span> / <span id="total-q-count">05</span></span>
+              </h3>
+              <span class="track-reward" id="q-points-reward">Points Reward: +20 XP</span>
+            </div>
+
+            <div class="track-progress-bar-bg">
+              <div id="quiz-progress-bar" class="track-progress-bar-fill" style="width: 20%;"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Step Track Indicators (1 to 5) -->
+        <div class="step-indicators-strip frosted-glass" id="step-indicators-container">
+          <!-- Dynamically populated or 1..5 buttons -->
+        </div>
+
+        <!-- Primary Question Panel -->
+        <div class="question-panel frosted-glass">
+          <div class="question-category-meta">
+            <span class="material-symbols-outlined text-[18px] text-sky-500">neurology</span>
+            <span id="q-category-tag">Programming Domain</span>
+          </div>
+
+          <h2 class="question-prompt" id="q-text">Loading question...</h2>
+
+          <div class="question-sub-line">
+            <span class="single-choice-tag">Single choice selection</span>
+            <span class="diff-badge" id="q-diff-badge">Standard Difficulty</span>
+          </div>
+        </div>
+
+        <!-- 4 Interactive Option Cards -->
+        <div class="options-list" id="options-container">
+          <!-- Dynamically populated option cards -->
+        </div>
+
+        <!-- Explanation / Hint Tray (Expands when answered) -->
+        <div id="explanation-box" class="explanation-tray frosted-glass hidden">
+          <div class="explanation-status-title" id="explanation-status">
+            <!-- Icon & Correct/Incorrect Text -->
+          </div>
+          <p class="explanation-content" id="explanation-text">
+            <!-- Explanation description -->
+          </p>
+        </div>
+
+        <!-- Quiz Action Controls -->
+        <div class="quiz-action-bar">
+          <button id="btn-next-question" class="btn-primary hidden" style="flex: 1;">
+            <span>Next Question</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 4: RESULTS SUMMARY -->
+    <!-- ========================================== -->
+    <section id="results-screen" class="screen-view">
+      <div class="results-card frosted-glass">
+        <div class="results-trophy-icon">🏆</div>
+        <h2 class="results-heading">Quiz Concluded!</h2>
+        <p class="results-subheading" id="results-subtitle">Exceptional focus! Here is your performance summary:</p>
+
+        <div id="new-high-score-banner" class="new-high-badge hidden">
+          🎉 NEW PERSONAL HIGH SCORE RECORDED! 🎉
+        </div>
+
+        <div class="results-bento-grid">
+          <div class="results-stat-box frosted-glass">
+            <span class="bento-stat-label">Final Score</span>
+            <span class="bento-stat-value" id="res-final-score" style="color: var(--accent-sky);">0 XP</span>
+          </div>
+          <div class="results-stat-box frosted-glass">
+            <span class="bento-stat-label">Correct Ratio</span>
+            <span class="bento-stat-value" id="res-correct-ratio">0/5</span>
+          </div>
+          <div class="results-stat-box frosted-glass">
+            <span class="bento-stat-label">Speed Bonuses</span>
+            <span class="bento-stat-value" id="res-speed-bonuses" style="color: #f59e0b;">0</span>
+          </div>
+          <div class="results-stat-box frosted-glass">
+            <span class="bento-stat-label">Total Time</span>
+            <span class="bento-stat-value" id="res-total-time">0.0s</span>
+          </div>
+        </div>
+
+        <div class="results-actions-list">
+          <button id="btn-play-again" class="btn-primary">
+            <span>Play Another Round</span>
+            <span class="material-symbols-outlined text-[18px]">replay</span>
+          </button>
+          <button id="btn-results-to-leaderboard" class="btn-subtle">
+            <span>View Arena Standings</span>
+            <span class="material-symbols-outlined text-[18px]">leaderboard</span>
+          </button>
+          <button id="btn-results-to-dashboard" class="btn-subtle">
+            <span>Return to Sanctuary</span>
+            <span class="material-symbols-outlined text-[18px]">home</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 5: LEADERBOARD / ARENA STANDINGS -->
+    <!-- ========================================== -->
+    <section id="leaderboard-screen" class="screen-view">
+      <div class="leaderboard-view">
+
+        <!-- Top Header Strip -->
+        <div class="leaderboard-top-strip">
+          <div class="badge-capsule light-glow">
+            <span class="material-symbols-outlined text-[16px]">stars</span>
+            <span>Global Season 14</span>
+          </div>
+
+          <div class="live-updating-pill frosted-glass">
+            <span class="online-dot" style="position:static; display:inline-block; width:7px; height:7px;"></span>
+            <span>Live Updating</span>
+          </div>
+        </div>
+
+        <div>
+          <h1 style="font-size: 22px; font-weight: 800; letter-spacing: -0.5px;">Arena Standings</h1>
+          <span style="font-size: 12px; color: var(--text-muted);" id="contenders-count-label">42,891 contenders registered</span>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-box-wrap">
+          <span class="material-symbols-outlined search-icon-pos text-[19px]">search</span>
+          <input type="text" id="leaderboard-search-input" class="search-input" placeholder="Search contenders, guilds, or ranks...">
+        </div>
+
+        <!-- Category Scope Filter Pills -->
+        <div class="leaderboard-tabs-bar" id="leaderboard-category-tabs">
+          <button class="lead-filter-tab active" data-cat="Global">🌍 Global</button>
+          <button class="lead-filter-tab" data-cat="Programming">💻 Programming</button>
+          <button class="lead-filter-tab" data-cat="Science">🔬 Science</button>
+          <button class="lead-filter-tab" data-cat="History">📜 History</button>
+          <button class="lead-filter-tab" data-cat="General Knowledge">🌟 Knowledge</button>
+        </div>
+
+        <!-- Top 3 Podium Cards -->
+        <div class="podium-container" id="podium-container">
+          <!-- Dynamically populated top 3 -->
+        </div>
+
+        <!-- Full Contenders Ranking List -->
+        <div class="contenders-list" id="contenders-list-container">
+          <!-- Dynamically populated contenders list -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 6: ADMIN PORTAL -->
+    <!-- ========================================== -->
+    <section id="admin-screen" class="screen-view">
+      <div class="admin-card frosted-glass">
+        <div class="admin-header-row">
+          <div>
+            <h2 style="font-size: 20px; font-weight: 800;">Administrator Sanctuary</h2>
+            <p style="font-size: 12px; color: var(--text-muted);">Manage knowledge questions and leaderboard statistics</p>
+          </div>
+          <button id="btn-admin-back" class="btn-subtle" style="width: auto; height: 34px; padding: 0 14px; font-size: 12px;">Back</button>
+        </div>
+
+        <div class="admin-actions-bar">
+          <button id="btn-admin-add-question" class="btn-primary" style="flex: 1; height: 40px; font-size: 13px;">+ Add Question</button>
+          <button id="btn-admin-reset-stats" class="btn-subtle" style="flex: 1; height: 40px; font-size: 13px; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">⚠️ Reset Stats</button>
+        </div>
+
+        <!-- Questions List Table -->
+        <div style="overflow-x: auto; margin-top: 8px;">
+          <input type="text" id="admin-search-input" class="search-input" placeholder="🔍 Search questions..." style="margin-bottom: 12px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--glass-border); text-align: left; color: var(--text-muted);">
+                <th style="padding: 8px;">ID</th>
+                <th style="padding: 8px;">Category</th>
+                <th style="padding: 8px;">Question</th>
+                <th style="padding: 8px;">Answer</th>
+                <th style="padding: 8px;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-questions-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- FLOATING BOTTOM NAV PILL -->
+  <!-- ========================================== -->
+  <nav id="bottom-nav" class="bottom-nav-bar hidden">
+    <div class="bottom-nav-inner">
+      <button id="nav-tab-home" class="nav-tab-btn active">
+        <span class="material-symbols-outlined text-[20px]">explore</span>
+        <span class="nav-tab-label">Home</span>
+      </button>
+
+      <button id="nav-tab-quiz" class="nav-tab-btn">
+        <span class="material-symbols-outlined text-[20px]">psychology</span>
+        <span class="nav-tab-label">Quiz</span>
+      </button>
+
+      <button id="nav-tab-rankings" class="nav-tab-btn">
+        <span class="material-symbols-outlined text-[20px]">leaderboard</span>
+        <span class="nav-tab-label">Rankings</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================================== -->
+  <!-- MODAL: USER PROFILE & SETTINGS -->
+  <!-- ========================================== -->
+  <div id="profile-modal" class="modal-overlay hidden">
+    <div class="modal-dialog frosted-glass">
+      <button id="btn-close-profile" class="modal-close-icon" title="Close">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <!-- Header: Avatar, Name, Email, Rank -->
+      <div class="profile-card-header">
+        <img
+          id="modal-avatar-img"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9gHgGbh8_tPQzIsblnGdSHbU5MVtlwGLg96zb9x5ENAeYCYmBjnD2IvyE9P12pVn1A94lfF--03uZ8_sO0m9ltPlvcdAVRt9gfVnAERURluzs1qgSLHeNlRxj-Ve9mbtObCExZS6r4hU76i0mHyKgzWkVKz4gTEV_UQ-8oyNrgqq6vp8FdaYrfT88ge4sJ_aGDKcZsLqDNERsX5XPCzheu8zLk4pFHsUFBISn7hTZ_RTE40ImyzGh"
+          alt="Avatar"
+          class="profile-modal-avatar"
+        >
+        <div>
+          <h3 class="profile-modal-name" id="modal-profile-name">Alex Mercer</h3>
+          <span class="profile-modal-email" id="modal-profile-email">alex.mercer@aether.io</span>
+          <div class="badge-capsule light-glow" style="margin-top: 4px; padding: 2px 10px; font-size: 10px;">
+            <span class="material-symbols-outlined text-[13px] text-sky-500">stars</span>
+            <span id="modal-rank-badge">Leaderboard Rank #4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento Stats -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 12px 0;">
+        <div class="bento-stat-card frosted-glass" style="padding: 10px 12px;">
+          <span class="bento-stat-label">Quizzes Taken</span>
+          <span class="bento-stat-value" id="modal-quizzes-taken" style="font-size: 18px;">142</span>
+          <span class="bento-stat-sub" style="font-size: 10px;">+12 this week</span>
+        </div>
+        <div class="bento-stat-card frosted-glass" style="padding: 10px 12px;">
+          <span class="bento-stat-label">Accuracy Marks</span>
+          <span class="bento-stat-value" id="modal-accuracy" style="font-size: 18px; color: var(--accent-sky);">88%</span>
+          <span class="bento-stat-sub" style="font-size: 10px;">Top 2% percentile</span>
+        </div>
+      </div>
+
+      <!-- Theme Switcher Pills -->
+      <div style="margin-bottom: 14px;">
+        <span class="form-label">Theme Mode</span>
+        <div style="display: flex; gap: 8px; margin-top: 6px;">
+          <button type="button" id="theme-btn-light" class="choice-pill active" style="flex: 1; text-align: center;">
+            ☀️ Solar Dawn
+          </button>
+          <button type="button" id="theme-btn-dark" class="choice-pill" style="flex: 1; text-align: center;">
+            🌙 Night Sky
+          </button>
+        </div>
+      </div>
+
+      <!-- Edit Profile Form -->
+      <form id="profile-edit-form" style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="form-group">
+          <label class="form-label" for="prof-input-name">Full Name</label>
+          <input type="text" id="prof-input-name" class="input-field" placeholder="Full name">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="prof-input-email">Email Address</label>
+          <input type="email" id="prof-input-email" class="input-field" placeholder="Email address">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="prof-input-password">Change Password (optional)</label>
+          <input type="password" id="prof-input-password" class="input-field" placeholder="Leave blank to keep current">
+        </div>
+
+        <button type="submit" class="btn-primary" style="height: 42px; margin-top: 4px;">Save Changes</button>
+      </form>
+
+      <!-- Past Quizzes List -->
+      <div style="margin-top: 14px;">
+        <span class="form-label">Past Quizzes</span>
+        <div class="past-quizzes-box" id="profile-past-quizzes-container">
+          <!-- Dynamically populated past quizzes -->
+        </div>
+      </div>
+
+      <!-- Log Out Action -->
+      <button type="button" id="btn-logout" class="btn-subtle" style="margin-top: 12px; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        <span>Log Out</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: QUIT CONFIRMATION -->
+  <!-- ========================================== -->
+  <div id="confirm-quit-modal" class="modal-overlay hidden">
+    <div class="modal-dialog frosted-glass" style="text-align: center;">
+      <span class="material-symbols-outlined" style="font-size: 40px; color: #ef4444; margin-bottom: 8px;">warning</span>
+      <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 4px;">Quit Current Quiz?</h3>
+      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.45; margin-bottom: 18px;">
+        Are you sure you want to quit the quiz early? Your progress in this round will not be saved.
+      </p>
+      <div style="display: flex; gap: 10px;">
+        <button id="btn-cancel-quit" class="btn-subtle" style="flex: 1;">Resume</button>
+        <button id="btn-confirm-quit" class="btn-primary" style="flex: 1; background: #ef4444; box-shadow: 0 4px 14px rgba(239,68,68,0.4);">Yes, Quit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: ADMIN ADD QUESTION -->
+  <!-- ========================================== -->
+  <div id="admin-add-modal" class="modal-overlay hidden">
+    <div class="modal-dialog frosted-glass">
+      <button id="btn-close-admin-add" class="modal-close-icon">&times;</button>
+      <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 14px;">Add New Question</h3>
+
+      <form id="admin-add-form" style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <input type="text" id="add-q-category" class="input-field" placeholder="e.g. Programming, Science" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Difficulty</label>
+          <select id="add-q-difficulty" class="input-field" style="height: 44px;" required>
+            <option value="Easy">Easy (10 XP)</option>
+            <option value="Medium" selected>Medium (20 XP)</option>
+            <option value="Hard">Hard (30 XP)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Question Text</label>
+          <textarea id="add-q-text" class="input-field" style="height: 70px; padding-top: 8px;" placeholder="Question text..." required></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <input type="text" id="add-opt-a" class="input-field" placeholder="Option A" required>
+          <input type="text" id="add-opt-b" class="input-field" placeholder="Option B" required>
+          <input type="text" id="add-opt-c" class="input-field" placeholder="Option C" required>
+          <input type="text" id="add-opt-d" class="input-field" placeholder="Option D" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Correct Option</label>
+          <select id="add-q-answer" class="input-field" style="height: 44px;" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Explanation</label>
+          <textarea id="add-q-explanation" class="input-field" style="height: 60px; padding-top: 8px;" placeholder="Explanation..." required></textarea>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 6px;">
+          <button type="button" id="btn-cancel-add-q" class="btn-subtle" style="flex: 1;">Cancel</button>
+          <button type="submit" class="btn-primary" style="flex: 1;">Save Question</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Shelf -->
+  <div id="toast-shelf" class="toast-shelf"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

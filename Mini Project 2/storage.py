@@ -1,4 +1,10 @@
-[
+import json
+import os
+
+USERS_FILE = "users.json"
+QUIZZES_FILE = "quizzes.json"
+
+DEFAULT_QUESTIONS = [
     {
         "id": 1,
         "category": "Programming",
@@ -840,3 +846,46 @@
         "explanation": "The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel was established in 1968."
     }
 ]
+def _load_json(filename, default_data):
+    if not os.path.exists(filename):
+        with open(filename, "w") as f:
+            json.dump(default_data, f, indent=4)
+        return default_data
+    try:
+        with open(filename, "r") as f:
+            content = f.read().strip()
+            if not content:
+                return default_data
+            return json.loads(content)
+    except (json.JSONDecodeError, FileNotFoundError):
+        with open(filename, "w") as f:
+            json.dump(default_data, f, indent=4)
+        return default_data
+
+def _save_json(filename, data):
+    with open(filename, "w") as f:
+        json.dump(data, f, indent=4)
+
+def load_users():
+    # Seed default admin user
+    default_users = [
+        {
+            "username": "admin",
+            "password": "adminpassword",
+            "is_admin": True,
+            "quizzes_played": 0,
+            "total_score": 0,
+            "high_score": 0,
+            "category_stats": {}
+        }
+    ]
+    return _load_json(USERS_FILE, default_users)
+
+def save_users(users):
+    _save_json(USERS_FILE, users)
+
+def load_quizzes():
+    return _load_json(QUIZZES_FILE, DEFAULT_QUESTIONS)
+
+def save_quizzes(quizzes):
+    _save_json(QUIZZES_FILE, quizzes)
